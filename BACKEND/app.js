@@ -1,8 +1,11 @@
 import express from "express";
 import dotenv  from "dotenv";
-import { nanoid } from "nanoid";
+
 import connectDB from "./src/config/mongo.config.js";
-import urlSchema from "./src/models/shorturl.model.js";
+import urlSchema from "./src/models/short_url.model.js";
+import short_url from "./src/routes/short_url.route.js";
+import { redirectFromShortUrl } from "./src/controller/short_url.controller.js";
+import { errorHandler } from "./src/utils/errorHandler.js";
 
 dotenv.config("./.env");
 
@@ -12,27 +15,13 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 // POST - create short URL.
-app.post("/api/create", (req, res) => {
-  const { url } = req.body
-  const shortUrl = nanoid(7);
-  const newUrl = new urlSchema({
-    full_url: url,
-    short_url: shortUrl,
-  })
-  newUrl.save()
-  res.send(nanoid(7));
-});
+app.use("/api/create", short_url)
 
 // GET - Redirection.
-app.get("/:id", async (req,res) => {
-  const {id} = req.params;
-  const url = await urlSchema.findOne({short_url: id})
-  if(url) {
-    res.redirect(url.full_url);
-  } else {
-    res.status(404).send("Not Found");
-  }
-});
+app.get("/:id", redirectFromShortUrl)
+
+// Error Handler.
+app.use(errorHandler)
 
 //Connecting to MongoDB.
 connectDB()
