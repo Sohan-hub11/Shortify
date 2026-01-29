@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { createShortUrl } from '../api/shortUrl.api';
 
 
 const UrlForm = () => {
@@ -8,8 +9,8 @@ const UrlForm = () => {
   const [copied, setCopied] = useState(false)
 
   const handleSubmit = async () => {
-    const { data } = 
-    setShortUrl(data);
+    const shortUrl = await createShortUrl(url)
+    setShortUrl(shortUrl);
   }
 
   const handleCopy = () => {
