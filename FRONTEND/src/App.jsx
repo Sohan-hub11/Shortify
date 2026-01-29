@@ -1,10 +1,11 @@
 import React from 'react'
+import HomePage from './pages/HomePage'
 
 const App = () => {
   return (
-    <div className='bg-blue-500'>
-      app
-    </div>
+    <>
+      <HomePage />
+    </>
   )
 }
 
