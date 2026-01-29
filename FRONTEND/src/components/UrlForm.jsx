@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+
 
 const UrlForm = () => {
 
@@ -8,7 +8,7 @@ const UrlForm = () => {
   const [copied, setCopied] = useState(false)
 
   const handleSubmit = async () => {
-    const { data } = await axios.post("http://localhost:3000/api/create", { url })
+    const { data } = 
     setShortUrl(data);
   }
 
