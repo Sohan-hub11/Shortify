@@ -8,6 +8,8 @@ import auth_routes from "./src/routes/auth.routes.js";
 import { redirectFromShortUrl } from "./src/controller/short_url.controller.js";
 import { errorHandler } from "./src/utils/errorHandler.js";
 import cors from "cors";
+import { attachUser } from "./src/utils/attachUser.js";
+import cookieParser from "cookie-parser";
 
 dotenv.config("./.env");
 
@@ -16,6 +18,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+
+app.use(cookieParser());
+app.use(attachUser);
+
 
 // POST - create short URL.
 app.use("/api/auth", auth_routes)
