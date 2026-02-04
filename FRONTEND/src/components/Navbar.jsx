@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from '@tanstack/react-router';
 
-const Navbar = ({ userName, onLogout }) => {
+const Navbar = () => {
   return (
     <nav className="bg-white border border-b-black">
       <div className=" mx-auto px-4 sm:px-6 lg:px-8">
@@ -14,7 +14,7 @@ const Navbar = ({ userName, onLogout }) => {
           </div>
 
           {/* Right side - Auth buttons */}
-          <div className="flex items-center">
+          {/* <div className="flex items-center">
             {(true) ? (
               <div className="flex items-center space-x-4">
                 <span className="text-gray-700">Welcome, {userName || 'User'}</span>
@@ -33,7 +33,7 @@ const Navbar = ({ userName, onLogout }) => {
                 Login
               </Link>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
     </nav>
